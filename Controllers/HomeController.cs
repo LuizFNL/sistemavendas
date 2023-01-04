@@ -17,11 +17,13 @@ public class HomeController : Controller
         _repositorio = repositorio;
     }
 
-    public async Task<IActionResult> Index()
+    public IActionResult Index(string searchString="")
     {
-        var itensDB = await _repositorio.ListarTodos();
+        // var itensDB = await _repositorio.ListarTodos(); //Listar tudo
 
-        return View(itensDB);
+        var itens = _repositorio.Filtrar(searchString);
+
+        return View(itens);
     }
 
     public IActionResult Privacy()

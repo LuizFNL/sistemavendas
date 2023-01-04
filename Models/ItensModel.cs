@@ -9,7 +9,6 @@ namespace sistemavendas.Models
         public int Id { get; set; }
         public string Nome { get; set; }
         public string URLImagemItem { get; set; }
-        [Display]
         public TipoItemEnum Tipo { get; set; }
         public decimal Preco { get; set; }
 
