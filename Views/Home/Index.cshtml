@@ -1,0 +1,25 @@
+﻿@model List<ItensModel>
+
+@{
+  ViewData["Title"] = "Home Page";
+}
+
+<div class="row row-cols-1 row-cols-md-6 g-4">
+  @foreach (var item in Model)
+  {
+    <div class="col">
+      <div class="card border-dark h-100 text-center">
+        <img src="@item.URLImagemItem" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">@item.Nome</h5>
+          <button type="button" class="btn btn-sm btn-danger" disabled>@item.Tipo.ToString().Replace("_", " ")</button>
+          <div><p></p></div>
+          <div class="card-footer">
+              <button type="button" class="btn btn-primary">Comprar por @item.Preco</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>
+</table>
