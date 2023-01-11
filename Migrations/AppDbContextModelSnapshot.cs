@@ -21,6 +21,27 @@ namespace sistemavendas.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("sistemavendas.Models.CarrinhoModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ItensModelId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ItensModelId");
+
+                    b.ToTable("Carrinhos");
+                });
+
             modelBuilder.Entity("sistemavendas.Models.ItensModel", b =>
                 {
                     b.Property<int>("Id")
@@ -30,7 +51,6 @@ namespace sistemavendas.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Nome")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Preco")
@@ -40,7 +60,6 @@ namespace sistemavendas.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("URLImagemItem")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -50,7 +69,7 @@ namespace sistemavendas.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = 20,
                             Nome = "Eco de Luden",
                             Preco = 3200m,
                             Tipo = 0,
@@ -58,7 +77,7 @@ namespace sistemavendas.Migrations
                         },
                         new
                         {
-                            Id = 2,
+                            Id = 21,
                             Nome = "Mata-Cráquens",
                             Preco = 3400m,
                             Tipo = 2,
@@ -66,7 +85,7 @@ namespace sistemavendas.Migrations
                         },
                         new
                         {
-                            Id = 3,
+                            Id = 22,
                             Nome = "Crepúsculo de Draktharr",
                             Preco = 3100m,
                             Tipo = 1,
@@ -74,7 +93,7 @@ namespace sistemavendas.Migrations
                         },
                         new
                         {
-                            Id = 4,
+                            Id = 23,
                             Nome = "Armadura de Warmog",
                             Preco = 3000m,
                             Tipo = 3,
@@ -82,7 +101,7 @@ namespace sistemavendas.Migrations
                         },
                         new
                         {
-                            Id = 5,
+                            Id = 24,
                             Nome = "Colhedor Noturno",
                             Preco = 3200m,
                             Tipo = 0,
@@ -90,7 +109,7 @@ namespace sistemavendas.Migrations
                         },
                         new
                         {
-                            Id = 6,
+                            Id = 25,
                             Nome = "Arco-escudo Imortal",
                             Preco = 3400m,
                             Tipo = 2,
@@ -98,7 +117,7 @@ namespace sistemavendas.Migrations
                         },
                         new
                         {
-                            Id = 7,
+                            Id = 26,
                             Nome = "Gume do infinito",
                             Preco = 3400m,
                             Tipo = 1,
@@ -106,7 +125,7 @@ namespace sistemavendas.Migrations
                         },
                         new
                         {
-                            Id = 8,
+                            Id = 27,
                             Nome = "Manopla dos Glacinatas",
                             Preco = 2700m,
                             Tipo = 3,
@@ -114,7 +133,7 @@ namespace sistemavendas.Migrations
                         },
                         new
                         {
-                            Id = 9,
+                            Id = 28,
                             Nome = "Capuz da Morte de Rabadon",
                             Preco = 3600m,
                             Tipo = 0,
@@ -122,7 +141,7 @@ namespace sistemavendas.Migrations
                         },
                         new
                         {
-                            Id = 10,
+                            Id = 29,
                             Nome = "Dançarina Fantasma",
                             Preco = 2600m,
                             Tipo = 2,
@@ -130,7 +149,7 @@ namespace sistemavendas.Migrations
                         },
                         new
                         {
-                            Id = 11,
+                            Id = 30,
                             Nome = "Colhedor de Essência",
                             Preco = 2800m,
                             Tipo = 1,
@@ -138,12 +157,23 @@ namespace sistemavendas.Migrations
                         },
                         new
                         {
-                            Id = 12,
+                            Id = 31,
                             Nome = "Quimiotanque Turbo",
                             Preco = 2800m,
                             Tipo = 3,
                             URLImagemItem = "https://pbs.twimg.com/media/ErLau-GXcAAmgje.jpg"
                         });
+                });
+
+            modelBuilder.Entity("sistemavendas.Models.CarrinhoModel", b =>
+                {
+                    b.HasOne("sistemavendas.Models.ItensModel", "ItensModel")
+                        .WithMany()
+                        .HasForeignKey("ItensModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ItensModel");
                 });
 #pragma warning restore 612, 618
         }

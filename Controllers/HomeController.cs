@@ -9,26 +9,25 @@ namespace sistemavendas.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private readonly IItensRepositorio _repositorio;
+    private readonly IItensRepositorio _repositorioItens;
+    private readonly ICarrinhoRepositorio _repositorioCarrinho;
 
-    public HomeController(ILogger<HomeController> logger, IItensRepositorio repositorio)
+    public HomeController(ILogger<HomeController> logger, 
+                            IItensRepositorio repositorioItens, 
+                            ICarrinhoRepositorio repositorioCarrinho)
     {
         _logger = logger;
-        _repositorio = repositorio;
+        _repositorioItens = repositorioItens;
+        _repositorioCarrinho = repositorioCarrinho;
     }
 
     public IActionResult Index(string searchString="")
     {
-        // var itensDB = await _repositorio.ListarTodos(); //Listar tudo
+        // var itensDB = await _repositorioItens.ListarTodos(); //Listar tudo
 
-        var itens = _repositorio.Filtrar(searchString);
+        var itens = _repositorioItens.Filtrar(searchString);
 
         return View(itens);
-    }
-
-    public IActionResult Privacy()
-    {
-        return View();
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

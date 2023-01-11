@@ -73,3 +73,10 @@ C:\Users\Luiz\Desktop\Luiz\Projetos\sistemavendas\bin\Debug\net7.0\Microsoft.Ent
 C:\Users\Luiz\Desktop\Luiz\Projetos\sistemavendas\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
 C:\Users\Luiz\Desktop\Luiz\Projetos\sistemavendas\bin\Debug\net7.0\Mono.TextTemplating.dll
 C:\Users\Luiz\Desktop\Luiz\Projetos\sistemavendas\bin\Debug\net7.0\System.CodeDom.dll
+C:\Users\Luiz\Desktop\Luiz\Projetos\sistemavendas\bin\Debug\net7.0\System.Web.Mvc.dll
+C:\Users\Luiz\Desktop\Luiz\Projetos\sistemavendas\bin\Debug\net7.0\System.Web.Razor.dll
+C:\Users\Luiz\Desktop\Luiz\Projetos\sistemavendas\bin\Debug\net7.0\System.Web.Helpers.dll
+C:\Users\Luiz\Desktop\Luiz\Projetos\sistemavendas\bin\Debug\net7.0\System.Web.WebPages.Deployment.dll
+C:\Users\Luiz\Desktop\Luiz\Projetos\sistemavendas\bin\Debug\net7.0\System.Web.WebPages.Razor.dll
+C:\Users\Luiz\Desktop\Luiz\Projetos\sistemavendas\bin\Debug\net7.0\System.Web.WebPages.dll
+C:\Users\Luiz\Desktop\Luiz\Projetos\sistemavendas\bin\Debug\net7.0\Microsoft.Web.Infrastructure.dll

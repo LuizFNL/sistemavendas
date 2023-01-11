@@ -1,0 +1,33 @@
+@model List<CarrinhoModel>
+
+@{
+    ViewData["Title"] = "Meu Carrinho";
+}
+<h1>@ViewData["Title"]</h1>
+
+<table class="table table-responsive table-hover text-start">
+    <thead>
+        <tr>
+            <th scope="col">Quantidade</th>
+            <th scope="col"></th>
+            <th scope="col">Item</th>
+            <th scope="col">Preço</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@item.Quantidade</th>
+                <td><img src="@item.ItensModel.URLImagemItem" width="10%" alt="..."></td>
+                <td>@item.ItensModel.Nome</td>
+                <td>@item.ItensModel.Preco</td>
+                <td><a role="button" asp-action="DeletarDoCarrinho" asp-route-id="@item.Id" class="btn btn-danger">DELETAR</a></td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+
+<h4 class="text-end">Valor total = @TempData["ValorTotal"]</h4>
