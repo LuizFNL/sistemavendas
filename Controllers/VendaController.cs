@@ -16,6 +16,10 @@ namespace sistemavendas.Controllers
 
         public IActionResult Index()
         {
+            TempData["Top1Total"] = _vendaRepositorio.Top1Total();
+            TempData["Top1Dia"] = _vendaRepositorio.Top1Dia();
+            TempData["Top1Mes"] = _vendaRepositorio.Top1Mes();
+
             return View(_vendaRepositorio.ListarVendas());
         }
 

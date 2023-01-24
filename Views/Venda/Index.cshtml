@@ -30,3 +30,93 @@
     </tbody>
 </table>
 
+<br>
+<h1>Relatório</h1>
+<br>
+
+<div class="row row-cols-1 row-cols-md-6 g-4">
+    <div class="col">
+        <div class="card border-dark h-100 text-center">
+            <h1></h1>
+            <div class="card-body">
+                <p>Vendas feitas<br><b>HOJE</b>:</p>
+                <div>
+                    <p></p>
+                </div>
+                <div class="card-footer">
+                    <h1>@Model.Where(x => x.DataVenda.Date == DateTime.Now.Date).Count()</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card border-dark h-100 text-center">
+            <h1></h1>
+            <div class="card-body">
+                <p>Total de vendas<br><b>TOTAL</b>:</p>
+                <div>
+                    <p></p>
+                </div>
+                <div class="card-footer">
+                    <h1>@Model.Count()</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card border-dark h-100 text-center">
+            <h1></h1>
+            <div class="card-body">
+                <p>Vendas no<br><b>MÊS</b>:</p>
+                <div>
+                    <p></p>
+                </div>
+                <div class="card-footer">
+                    <h1>@Model.Where(x => x.DataVenda.Month == DateTime.Now.Month).Count()</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card border-dark h-100 text-center">
+            <h1></h1>
+            <div class="card-body">
+                <p>★ Top 1 (DIA) ★<br><b>MAIS VENDIDO</b>:</p>
+                <div>
+                    <p></p>
+                </div>
+                <div class="card-footer">
+                    <img src="@TempData["Top1Dia"]" alt="..." width="80%" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card border-dark h-100 text-center">
+            <h1></h1>
+            <div class="card-body">
+                <p>★ Top 1 (MÊS) ★<br><b>MAIS VENDIDO</b>:</p>
+                <div>
+                    <p></p>
+                </div>
+                <div class="card-footer">
+                    <img src="@TempData["Top1Mes"]" alt="..." width="80%" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card border-dark h-100 text-center">
+            <h1></h1>
+            <div class="card-body">
+                <p>★ Top 1 ★<br> <b>MAIS VENDIDO</b>:</p>
+                <div>
+                    <p></p>
+                </div>
+                <div class="card-footer">
+                    <img src="@TempData["Top1Total"]" alt="..." width="80%" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -15,9 +15,8 @@
 
 <br>
 
-  @if (Model.Count() == 0)
+  @if (!Model.Any())
   {
-    
     <div class="col align-items-center">
     <h1>Desculpe, não conseguimos encontrar este item :(</h1>
     <h4>Lembrando que este projeto só conta com alguns itens</h4>

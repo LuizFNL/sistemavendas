@@ -45,5 +45,57 @@ namespace sistemavendas.Repositories
         {
             return _context.Vendas.Include(x => x.ItensVenda).ToList();
         }
+
+        public string Top1Dia()
+        {
+            var vendasMes = _context.Vendas.Where(x => x.DataVenda.Date == DateTime.Now.Date)
+                                            .Select(x => x.Id).ToList();
+            List<ItensVenda> itensVendidos = new List<ItensVenda>();
+            var top1 = new ItensVenda();
+
+            foreach (var item in vendasMes)
+            {
+                itensVendidos.Add(_context.ItensVendas.FirstOrDefault(x => x.VendaModelId == item));
+            }
+            if (itensVendidos != null)
+            {
+                var consulta = itensVendidos.GroupBy(x => x.ItensModel).OrderByDescending(x => x.Sum(x => x.Quantidade)).Select(x => x.First()).ToList();
+
+                top1 = consulta.First();
+            }
+
+            return top1.ItensModel.URLImagemItem;
+        }
+
+        public string Top1Mes()
+        {
+            var vendasMes = _context.Vendas.Where(x => x.DataVenda.Month == DateTime.Now.Month)
+                                            .Select(x => x.Id).ToList();
+            List<ItensVenda> itensVendidos = new List<ItensVenda>();
+            var top1 = new ItensVenda();
+
+            foreach (var item in vendasMes)
+            {
+                itensVendidos.Add(_context.ItensVendas.FirstOrDefault(x => x.VendaModelId == item));
+            }
+            if (itensVendidos != null)
+            {
+                var consulta = itensVendidos.GroupBy(x => x.ItensModel).OrderByDescending(x => x.Sum(x => x.Quantidade)).Select(x => x.First()).ToList();
+
+                top1 = consulta.First();
+            }
+
+            return top1.ItensModel.URLImagemItem;
+        }
+
+        public string Top1Total()
+        {
+            var itensVendidos = _context.ItensVendas.Where(x => x.EmAberto == false);
+            var consulta = itensVendidos.Include(x => x.ItensModel).GroupBy(x => x.ItensModel).OrderByDescending(x => x.Sum(x => x.Quantidade)).Select(x => x.First()).ToList();
+            var top1 = new ItensVenda();
+            top1 = consulta.First();
+
+            return top1.ItensModel.URLImagemItem;
+        }
     }
 }

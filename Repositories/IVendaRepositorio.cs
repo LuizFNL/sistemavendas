@@ -7,5 +7,8 @@ namespace sistemavendas.Repositories
         List<VendaModel> ListarVendas();
         void EfetuarCompra();
         List<ItensVenda> ItensVendidos(int id);
+        string Top1Total();
+        string Top1Mes();
+        string Top1Dia();
     }
 }
