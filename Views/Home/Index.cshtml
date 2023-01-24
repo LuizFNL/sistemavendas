@@ -35,7 +35,7 @@
           <button type="button" class="btn btn-sm btn-danger" disabled>@item.Tipo.ToString().Replace("_", " ")</button>
           <div><p></p></div>
           <div class="card-footer">
-              <a role="button" class="btn btn-primary" asp-controller="Carrinho" asp-action="AdicionarAoCarrinho" asp-route-id=@item.Id method="post">Comprar por @item.Preco</a>
+              <a role="button" class="btn btn-primary" asp-controller="Carrinho" asp-action="AdicionarAoCarrinho" asp-route-id=@item.Id>Comprar por @item.Preco</a>
           </div>
         </div>
       </div>

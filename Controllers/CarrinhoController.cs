@@ -30,7 +30,7 @@ namespace sistemavendas.Controllers
 
         public IActionResult AdicionarAoCarrinho(int id)
         {
-            var carrinho = _repositorioCarrinho.Adicionar(id);
+            _repositorioCarrinho.Adicionar(id);
             _repositorioCarrinho.SalvarCarrinho();
 
             return RedirectToAction(nameof(Index));
@@ -43,8 +43,6 @@ namespace sistemavendas.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

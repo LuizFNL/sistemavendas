@@ -4,10 +4,10 @@ namespace sistemavendas.Repositories
 {
     public interface ICarrinhoRepositorio
     {
-        CarrinhoModel Adicionar(int id);
+        void Adicionar(int id);
         void Deletar(int id);
         void SalvarCarrinho();
-        List<CarrinhoModel> ListarItensCarrinho();
+        List<ItensVenda> ListarItensCarrinho();
         decimal CalcularValorCarrinho();
     }
 }

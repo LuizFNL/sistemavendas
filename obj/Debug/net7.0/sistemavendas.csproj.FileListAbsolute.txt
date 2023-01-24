@@ -80,3 +80,4 @@ C:\Users\Luiz\Desktop\Luiz\Projetos\sistemavendas\bin\Debug\net7.0\System.Web.We
 C:\Users\Luiz\Desktop\Luiz\Projetos\sistemavendas\bin\Debug\net7.0\System.Web.WebPages.Razor.dll
 C:\Users\Luiz\Desktop\Luiz\Projetos\sistemavendas\bin\Debug\net7.0\System.Web.WebPages.dll
 C:\Users\Luiz\Desktop\Luiz\Projetos\sistemavendas\bin\Debug\net7.0\Microsoft.Web.Infrastructure.dll
+C:\Users\Luiz\Desktop\Luiz\Projetos\sistemavendas\bin\Debug\net7.0\Microsoft.VisualStudio.Web.BrowserLink.dll

@@ -1,7 +1,5 @@
-using Microsoft.AspNetCore.Mvc;
 using sistemavendas.Models;
 using sistemavendas.Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace sistemavendas.Repositories
 {
@@ -12,42 +10,45 @@ namespace sistemavendas.Repositories
         {
             _context = context;
         }
-        public CarrinhoModel Adicionar(int id)
+        public void Adicionar(int id)
         {
-            var verifCar = _context.Carrinhos.FirstOrDefault(x => x.ItensModelId == id);
+            var itensEmAberto = _context.ItensVendas.Where(x => x.EmAberto == true).ToList();
+            var verifExisteItem = itensEmAberto.FirstOrDefault(x => x.ItensModelId == id);
 
-            if (verifCar != null)
+            if (itensEmAberto != null)
             {
-                verifCar.Quantidade += 1;
-                _context.Update(verifCar);
-
-                return verifCar;
+                if (verifExisteItem != null)
+                {
+                verifExisteItem.Quantidade += 1;
+                _context.Update(verifExisteItem);
+                    return;
+                }
             }
-
-            var item = _context.Itens.Find(id);
-            CarrinhoModel carrinho = new CarrinhoModel();
-
-            if (item != null)
-            {
-                carrinho.ItensModelId = item.Id;
-                carrinho.Quantidade = 1;
-                _context.Carrinhos.Add(carrinho);
-            }
-
-            return carrinho;
+                ItensVenda addItem = new ItensVenda();
+                addItem.EmAberto = true;
+                addItem.Quantidade = 1;
+                addItem.ItensModelId = id;
+                addItem.VendaModelId = null;
+            _context.Add(addItem);
         }
 
         public decimal CalcularValorCarrinho()
         {
             decimal total = 0;
 
-            var carrinhos = _context.Carrinhos.ToList();
+            var carrinhos = _context.ItensVendas.Where(x => x.EmAberto == true).ToList();
             foreach (var carrinho in carrinhos)
             {
-                var quant = carrinho.Quantidade;
-                var preco = carrinho.ItensModel.Preco;
+                int quant = carrinho.Quantidade;
+                var buscaPreco = _context.Itens.FirstOrDefault(x => carrinho.ItensModelId == x.Id);
+                decimal preco = 0;
 
-                var totalCarrinho = quant * preco;
+                if(buscaPreco != null)
+                {
+                    preco = buscaPreco.Preco;
+                }
+
+                decimal totalCarrinho = quant * preco;
                 total += totalCarrinho;
             }
 
@@ -56,24 +57,24 @@ namespace sistemavendas.Repositories
 
         public void Deletar(int id)
         {
-            var item = _context.Carrinhos.Find(id);
+            var item = _context.ItensVendas.Find(id);
 
             if (item != null)
             {
-                _context.Carrinhos.Remove(item);
+                _context.ItensVendas.Remove(item);
             }
         }
 
-        public List<CarrinhoModel> ListarItensCarrinho()
+        public List<ItensVenda> ListarItensCarrinho()
         {
-            var itensCarrinho = _context.Carrinhos.Include(x => x.ItensModel).ToList();
+            var itensCarrinho = _context.ItensVendas.Where(x => x.EmAberto == true).ToList();
 
             return itensCarrinho;
         }
 
         public void SalvarCarrinho()
         {
-             _context.SaveChanges();
-        }
+            _context.SaveChanges();
+        }        
     }
 }

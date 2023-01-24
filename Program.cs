@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IItensRepositorio, ItensRepositorio>();
 builder.Services.AddScoped<ICarrinhoRepositorio, CarrinhoRepositorio>();
+builder.Services.AddScoped<IVendaRepositorio, VendaRepositorio>();
 builder.Services.AddDbContext<AppDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("ConexaoPadrao")));
 
@@ -19,6 +20,7 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+    app.UseBrowserLink();
 }
 
 app.UseHttpsRedirection();

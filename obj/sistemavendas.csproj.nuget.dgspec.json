@@ -56,6 +56,10 @@
               "target": "Package",
               "version": "[7.0.1, )"
             },
+            "Microsoft.VisualStudio.Web.BrowserLink": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Microsoft.jQuery.Unobtrusive.Ajax": {
               "target": "Package",
               "version": "[3.2.6, )"

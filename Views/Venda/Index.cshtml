@@ -1,0 +1,32 @@
+@model List<VendaModel>
+@using sistemavendas.Models
+
+@{
+    ViewData["Title"] = "Página do vendedor";
+}
+<h1>Ultimas vendas</h1>
+
+<table class="table table-responsive table-hover text-start">
+    <thead>
+        <tr>
+            <th scope="col">Data</th>
+            <th scope="col">Hora</th>
+            <th scope="col">Itens vendidos</th>
+            <th scope="col">Valor venda</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@item.DataVenda.ToShortDateString()</th>
+                <td>@item.DataVenda.ToShortTimeString()</td>
+                <td><a role="button" asp-route-id="@item.Id" asp-action="BuscarVenda" class="btn btn-primary"><i
+                        class="bi bi-search"></i> Ver itens vendidos</a></td>
+                <td>@item.ValorTotal</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,4 +1,4 @@
-@model List<CarrinhoModel>
+@model List<ItensVenda>
 
 @{
     ViewData["Title"] = "Meu Carrinho";
@@ -23,11 +23,28 @@
                 <td><img src="@item.ItensModel.URLImagemItem" width="10%" alt="..."></td>
                 <td>@item.ItensModel.Nome</td>
                 <td>@item.ItensModel.Preco</td>
-                <td><a role="button" asp-action="DeletarDoCarrinho" asp-route-id="@item.Id" class="btn btn-danger">DELETAR</a></td>
+                <td><a role="button" asp-action="DeletarDoCarrinho" asp-route-id="@item.Id"
+                    class="btn btn-danger btn-sm">X</a></td>
             </tr>
 
         }
     </tbody>
 </table>
 
+<br>
+
+@if (Model.Any())
+{
+    <div class="position-relative top-50 start-50">
+        <a role="button" asp-controller="Venda" asp-action="Comprar" class="btn btn-primary btn-lg">Comprar</a>
+    </div>
+}else if (!Model.Any()){
+    <div class="text-center">
+        <h5>Ainda não há itens no seu carrinho, por favor volte a página inicial e faça suas compras :)</h5>
+    </div>
+}
+
+<br>
 <h4 class="text-end">Valor total = @TempData["ValorTotal"]</h4>
+
+

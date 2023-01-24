@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using sistemavendas.Data;
 
@@ -11,9 +12,11 @@ using sistemavendas.Data;
 namespace sistemavendas.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230123204228_migrationteste4")]
+    partial class migrationteste4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -162,7 +165,7 @@ namespace sistemavendas.Migrations
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
-                    b.Property<int?>("VendaModelId")
+                    b.Property<int>("VendaModelId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -203,7 +206,9 @@ namespace sistemavendas.Migrations
 
                     b.HasOne("sistemavendas.Models.VendaModel", null)
                         .WithMany("ItensVenda")
-                        .HasForeignKey("VendaModelId");
+                        .HasForeignKey("VendaModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ItensModel");
                 });
