@@ -48,21 +48,25 @@ namespace sistemavendas.Repositories
 
         public string Top1Dia()
         {
-            var vendasMes = _context.Vendas.Where(x => x.DataVenda.Date == DateTime.Now.Date)
-                                            .Select(x => x.Id).ToList();
+            var vendasDia = _context.Vendas.Where(x => x.DataVenda.Date == DateTime.Now.Date)
+                                            .ToList();
             List<ItensVenda> itensVendidos = new List<ItensVenda>();
             var top1 = new ItensVenda();
 
-            foreach (var item in vendasMes)
+            foreach (var item in vendasDia)
             {
-                itensVendidos.Add(_context.ItensVendas.FirstOrDefault(x => x.VendaModelId == item));
+                itensVendidos.AddRange(_context.ItensVendas.Include(x => x.ItensModel).Where(x => x.VendaModelId == item.Id));
             }
-            if (itensVendidos != null)
+            if (itensVendidos.Any())
             {
-                var consulta = itensVendidos.GroupBy(x => x.ItensModel).OrderByDescending(x => x.Sum(x => x.Quantidade)).Select(x => x.First()).ToList();
+                var consulta = itensVendidos.GroupBy(x => x.ItensModel).OrderByDescending(y => y.Sum(w => w.Quantidade)).Select(x => x.ToList()).First();
+                top1 = consulta[0];
+            }
+            else
+            {
+                return "https://w7.pngwing.com/pngs/380/139/png-transparent-x-red-mark-incorrect.png";
+            }
 
-                top1 = consulta.First();
-            }
 
             return top1.ItensModel.URLImagemItem;
         }
@@ -70,30 +74,42 @@ namespace sistemavendas.Repositories
         public string Top1Mes()
         {
             var vendasMes = _context.Vendas.Where(x => x.DataVenda.Month == DateTime.Now.Month)
-                                            .Select(x => x.Id).ToList();
+                                            .ToList();
             List<ItensVenda> itensVendidos = new List<ItensVenda>();
             var top1 = new ItensVenda();
 
             foreach (var item in vendasMes)
             {
-                itensVendidos.Add(_context.ItensVendas.FirstOrDefault(x => x.VendaModelId == item));
+                itensVendidos.AddRange(_context.ItensVendas.Include(x => x.ItensModel).Where(x => x.VendaModelId == item.Id));
             }
-            if (itensVendidos != null)
+            if (itensVendidos.Any())
             {
-                var consulta = itensVendidos.GroupBy(x => x.ItensModel).OrderByDescending(x => x.Sum(x => x.Quantidade)).Select(x => x.First()).ToList();
+                var consulta = itensVendidos.GroupBy(x => x.ItensModel).OrderByDescending(y => y.Sum(w => w.Quantidade)).Select(x => x.ToList()).First();
+                top1 = consulta[0];
 
-                top1 = consulta.First();
+                return top1.ItensModel.URLImagemItem;
+            }
+            else
+            {
+                return "https://w7.pngwing.com/pngs/380/139/png-transparent-x-red-mark-incorrect.png";
             }
 
-            return top1.ItensModel.URLImagemItem;
         }
 
         public string Top1Total()
         {
             var itensVendidos = _context.ItensVendas.Where(x => x.EmAberto == false);
-            var consulta = itensVendidos.Include(x => x.ItensModel).GroupBy(x => x.ItensModel).OrderByDescending(x => x.Sum(x => x.Quantidade)).Select(x => x.First()).ToList();
             var top1 = new ItensVenda();
-            top1 = consulta.First();
+
+            if (itensVendidos.Any())
+            {
+                var consulta = itensVendidos.Include(x => x.ItensModel).GroupBy(x => x.ItensModel).OrderByDescending(x => x.Sum(x => x.Quantidade)).Select(x => x.ToList()).First();
+                top1 = consulta[0];
+            }
+            else
+            {
+                return "https://w7.pngwing.com/pngs/380/139/png-transparent-x-red-mark-incorrect.png";
+            }
 
             return top1.ItensModel.URLImagemItem;
         }
